@@ -8,7 +8,7 @@ widgetEngine.register('number-picker', {
     // Default configuration
     defaults: {
         numbers: [7, 42, 99],
-        title: '🎯 Pick Your Favorite Number',
+        title: 'Pick Your Favorite Number',
         submitText: 'Submit My Choice',
         theme: 'default'
     },
