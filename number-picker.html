@@ -7,23 +7,15 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Widget Container -->
     <div id="number-picker-app"></div>
 
-    <!-- Load Scripts at end of body (DOM is ready by now) -->
     <script src="js/widget-engine.js"></script>
     <script src="js/number-picker-widget.js"></script>
-
-    <!-- Initialize immediately (no DOMContentLoaded needed) -->
+    
     <script>
-        const picker = widgetEngine.mount('number-picker', 'number-picker-app', {
-            numbers: [7, 42, 99],
-            title: '🎯 Pick Your Favorite Number',
-            submitText: 'Submit My Choice'
-        });
-
-        picker.on('change', (state) => {
-            console.log('Widget state:', state);
+        // Runs immediately — no waiting
+        widgetEngine.mount('number-picker', 'number-picker-app', {
+            numbers: [7, 42, 99]
         });
     </script>
 </body>
