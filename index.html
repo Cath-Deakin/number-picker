@@ -4,76 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Picker Widget</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        .controls {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .refresh-btn {
-            padding: 10px 20px;
-            font-size: 14px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .refresh-btn:hover {
-            background: #5568d3;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Refresh Button -->
-    <div class="controls">
-        <button class="refresh-btn" onclick="refreshWidget()">🔄 New Numbers</button>
-    </div>
-
     <!-- Widget Container -->
     <div id="number-picker-app"></div>
 
-    <!-- Load Scripts at end of body -->
-    <script src="js/widget-engine.js"></script>
-    <script src="js/number-picker-widget.js"></script>
+    <!-- Load Scripts at end of body (DOM is ready by now) -->
+    <script src="widget-engine.js"></script>
+    <script src="number-picker-widget.js"></script>
 
+    <!-- Initialize immediately (no DOMContentLoaded needed) -->
     <script>
-        let picker;
+        const picker = widgetEngine.mount('number-picker', 'number-picker-app', {
+            numbers: [7, 42, 99],
+            title: '🎯 Pick Your Favorite Number',
+            submitText: 'Submit My Choice'
+        });
 
-        function generateRandomNumbers(count = 3, min = 1, max = 100) {
-            const numbers = [];
-            while (numbers.length < count) {
-                const num = Math.floor(Math.random() * (max - min + 1)) + min;
-                if (!numbers.includes(num)) {
-                    numbers.push(num);
-                }
-            }
-            return numbers.sort((a, b) => a - b);
-        }
-
-        function initializePicker() {
-            picker = widgetEngine.mount('number-picker', 'number-picker-app', {
-                numbers: generateRandomNumbers(3, 1, 100),
-                title: 'Pick Your Favorite Number',
-                submitText: 'Submit My Choice'
-            });
-
-            picker.on('change', (state) => {
-                console.log('Widget state changed:', state);
-            });
-        }
-
-        function refreshWidget() {
-            const newNumbers = generateRandomNumbers(3, 1, 100);
-            picker.setOptions({ numbers: newNumbers });
-            console.log('New numbers:', newNumbers);
-        }
-
-        // Initialize on load
-        initializePicker();
+        picker.on('change', (state) => {
+            console.log('Widget state changed:', state);
+        });
     </script>
 </body>
 </html>
